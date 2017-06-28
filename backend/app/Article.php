@@ -8,14 +8,15 @@ class Article extends Model
 {
     protected $guarded = array('id');
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany('App\User', 'user_articles', 'articleID', 'userID')
-                    ->withTimestamps();
+        // The relationship function fails on the following line;
+        return $this->belongsTo('App\User', 'userID', 'id');
     }
 
     public function posts()
     {
-        return $this->hasMany('App\Post', 'article_id', 'id');
+        // The relationship function fails on the following line:
+        return $this->hasMany('App\Post', 'article_id');
     }
 }

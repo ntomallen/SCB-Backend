@@ -31,12 +31,13 @@ class User extends Authenticatable
 
     public function articles()
     {
-        return $this->belongsToMany('App\Article', 'user_articles', 'userID', 'articleID')
-                    ->withTimestamps();
+        // This relationship fails on the follwing line:
+        return $this->hasMany('App\Article', 'userID', 'id');
     }
 
     public function posts()
     {
-        return $this->hasMany('App\Post');
+        // The relationship function fails on the following line:
+        return $this->hasMany('App\Post', 'user_id', 'id');
     }
 }
