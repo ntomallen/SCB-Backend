@@ -34,18 +34,21 @@ Route::resource('articles', 'ArticleController');
 
 Route::get('/login', function (Request $request) {
 	$accessKey = $request['accesskey'];
-	// $redirectURI = 0;
-	// $appSecret = 1;
+	return $accessKey;
 
+	$clientID = '137575509998503';
+	$redirectURI = 'https://www.facebook.com/connect/login_success.html';
+	$appSecret = 'somethin';
+	
 	$client = new Client();
 	
-	$res = $client ->request('GET', fblink, [
+	$res = $client ->request('GET', 'https://graph.facebook.com/v2.9/oauth/access_token', [
 		'query' => ['client_id' => $clientID,
 					'redirect_uri' => $redirectURI,
 					'client_secret' => $appSecret,
 					'code' => $accessKey ]
 	]);
-	
+
 	return $res;
 });
 
